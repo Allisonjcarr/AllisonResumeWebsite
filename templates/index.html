@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <style>
+        .avatar {
+            width: 100px; /* Width of the image */
+            height: 100px; /* Height of the image - must match width for a perfect circle */
+            object-fit: cover; /* Ensure the image covers the circle */
+            border-radius: 50%; /* Make the image circular */
+            display: block; /* Ensure margin auto works */
+            margin: 1rem auto; /* Center horizontally */
+        }
+    </style>
+
+    <div class="container">
+    <div class="row justify-content-center align-items-center mt-5">
+        <div class="col-md-6 col-lg-4">
+            <div class="card" style="width: 35rem;">
+                <img src="{{ url_for('static', path='images/headshot.jpg') }}" class="avatar rounded-circle"
+                     style="width: 260px; height: 260px"
+                     alt="Avatar Image">
+                <div class="card-body text-center">
+                    <h2 class="card-title">{{ resume_data['name'] }}</h2>
+                    <p class="card-subtitle">{{ resume_data['title'] }}</p>
+                    <hr/>
+                    <p class="card-text">{{ resume_data['summary'] }}</p>
+                </div>
+                <div class="card-body text-center">
+                    <a href="mailto:{{ resume_data['email'] }}?subject=Contact%20via%20Website&body=Hello%20{{ resume_data['name'] }},%0D%0A%0D%0A'"
+                       class="btn btn-primary">
+                        Send me an email
+                    </a>
+                    <a href="{{ resume_data['github'] }}" class="btn btn-primary">Github Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center align-items-center mt-5">
+        <div class="col-md-6 col-lg-4">
+            <div class="card mt-4" style="width: 35rem;">
+                <div class="card-body text-center">
+                    <h3 class="card-title">Skills</h3>
+                    <hr/>
+                    <div class="badge-container mt-4">
+                        {% for skill in resume_data['skills'] %}
+                            <span class="badge bg-info m-1" style="font-size: 16px">
+                                    {{ skill }}
+                                </span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center align-items-center mt-5">
+            <div class="col-md-6 col-lg-4">
+                <div class="card text-bg-success mb-3" style="width: 35rem;">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">Education</h3>
+                        <div class="badge-container mt-4">
+                            {% for degree in resume_data['education'] %}
+                                <div class="card mt-4">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">{{ degree['degree'] }}</h5>
+                                        <p>{{ degree['institution'] }}</p>
+                                        <p>{{ degree['dates'] }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}
+

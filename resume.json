@@ -1,0 +1,44 @@
+{
+  "education": [
+    {
+      "degree": "B.A. in Chemistry",
+      "institution": "The University of North Carolina at Chapel Hill",
+      "dates": "2013 - 2017"
+    },
+    {
+      "degree": "B.A. in Hispanic Linguistics",
+      "institution": "The University of North Carolina at Chapel Hill",
+      "dates": "2013 - 2017"
+    }
+  ],
+  "email": "allisonjcarr7@gmail.com",
+  "experience": [
+    {
+      "title": "Web Developer",
+      "company": "Tech Solutions",
+      "dates": "Jan 2020 - Present",
+      "description": "Developed and maintained web applications using FastAPI and other technologies."
+    },
+    {
+      "title": "Software Engineer",
+      "company": "Code Innovators",
+      "dates": "Jun 2018 - Dec 2019",
+      "description": "Worked on various software projects, specializing in backend development."
+    }
+  ],
+  "name": "Allison Carr",
+  "title": "Data Scientist",
+  "location": "Fletcher, NC USA",
+  "github": "https://github.com/Allisonjcarr",
+  "skills": [
+    "Python",
+    "SQL",
+    "Tableau",
+    "Metabase",
+    "FastAPI",
+    "HTML",
+    "CSS",
+    "JavaScript"
+  ],
+  "summary": "Detail-oriented professional with extensive experience in manufacturing, farming, and greenhouse management, seeking to leverage analytical and problem-solving skills in a data analyst role. Skilled in process optimization, data-driven decision-making, and performance tracking. Passionate about transforming raw data into actionable insights to drive business improvements."
+}

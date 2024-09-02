@@ -1,0 +1,58 @@
+# Python bytecode
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# IDE specific files
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# mypy
+.mypy_cache/
+
+# Pytest
+.cache/
+
+# Logs
+*.log
+
+# Environment variables
+.env
+
+
+# Cache files
+*.cache
+*.tmp
+*.bak
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Build directories
+build/
+dist/
+*.egg-info/
+
+# FastAPI generated files
+*.sqlite3
+
+# Dependency directories
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Package distribution
+*.egg
+*.egg-info
