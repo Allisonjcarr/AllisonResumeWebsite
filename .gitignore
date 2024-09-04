@@ -56,3 +56,4 @@ pip-delete-this-directory.txt
 # Package distribution
 *.egg
 *.egg-info
+/website.db
