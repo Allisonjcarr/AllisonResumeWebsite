@@ -15,6 +15,11 @@
     <div class="container">
     <div class="row justify-content-center align-items-center mt-5">
         <div class="col-md-6 col-lg-4">
+            <div class="card mb-4" style="width: 480px;">
+                <div class="card-body text-center">
+                    Welcome to my website! Total requests: {{ total_visits }}
+                </div>
+            </div>
             <div class="card" style="width: 480px;">
                 <img src="{{ url_for('static', path='images/headshot.jpg') }}" class="avatar rounded-circle"
                      style="width: 260px; height: 260px"
