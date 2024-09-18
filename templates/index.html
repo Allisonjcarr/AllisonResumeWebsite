@@ -13,16 +13,19 @@
     </style>
 
     <div class="container">
-    <div class="row justify-content-center align-items-center mt-5">
+    <div class="row justify-content-center align-items-center mt-4">
         <div class="col-md-6 col-lg-4">
             <div class="card mb-4" style="width: 480px;">
                 <div class="card-body text-center">
-                    Welcome to my website! Total requests: {{ total_visits }}
+                    <h5> Hello! </h5>
+                    You just made request number:
+                    <h5 class="text-success">{{ total_visits }}</h5>
+                    To view statistics about requests made to my website, click <a href="/project-website">here</a>!
                 </div>
             </div>
             <div class="card" style="width: 480px;">
                 <img src="{{ url_for('static', path='images/headshot.jpg') }}" class="avatar rounded-circle"
-                     style="width: 260px; height: 260px"
+                     style="border: 2px solid; width: 260px; height: 260px"
                      alt="Avatar Image">
                 <div class="card-body text-center">
                     <h2 class="card-title">{{ resume_data['name'] }}</h2>
@@ -60,7 +63,7 @@
 
         <div class="row justify-content-center align-items-center mt-5">
             <div class="col-md-6 col-lg-4">
-                <div class="card text-bg-success mb-3" style="width: 480px;">
+                <div class="card mb-3" style="width: 480px;">
                     <div class="card-body text-center">
                         <h3 class="card-title">Education</h3>
                         <div class="badge-container mt-4">

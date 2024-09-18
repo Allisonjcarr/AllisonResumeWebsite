@@ -1,0 +1,12 @@
+{% macro code_card(title, query) %}
+    <div class="container mt-4 mb-4" style="max-width: 500px">
+        <div class="card shadow-lg line-numbers">
+            <div class="card-header bg-primary text-white">
+                {{ title }}
+            </div>
+            <pre class="text-monospace m-0"
+                 style="border-top-left-radius: 0; border-top-right-radius: 0;"><code
+                    class="language-sql line-numbers">{{ query }}</code></pre>
+        </div>
+    </div>
+{% endmacro %}

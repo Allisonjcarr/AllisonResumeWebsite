@@ -1,7 +1,8 @@
 import requests
 from fastapi import Request, Depends
 from datetime import datetime
-from .models import get_session_local, WebsiteVisits, SessionLocal
+from .models import WebsiteVisits
+from .db import SessionLocal, get_session_local
 from user_agents import parse
 
 

@@ -1,5 +1,144 @@
 {% extends "layout.html" %}
-
+{% from "macros/code-card.html" import code_card %}
 {% block content %}
-    <h1>project-website</h1>
+    <div class="container">
+        <div class="row justify-content-center align-items-center mt-5">
+            <div class="col-auto">
+                <div class="card clear-card mb-4">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <h1>My Portfolio Website</h1>
+                            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                                incididunt ut
+                                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                                ullamco
+                                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
+                                in
+                                voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                                cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                                laborum."</p>
+
+                            <h3>Recent Requests</h3>
+                        </div>
+                        {{ code_card("SQL Query", "SELECT\n    id,\n    device,\n    browser,\n    city,\n    state,\n    visited_at,\n    endpoint\nFROM website_visits\nORDER BY id desc\nLIMIT 10;") }}
+
+                        <div class="table-responsive">
+                            <table class="table table-striped" style="border: 2px solid">
+                                <thead>
+                                <tr class="table-success">
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Device</th>
+                                    <th scope="col">Browser</th>
+                                    <th scope="col">City</th>
+                                    <th scope="col">State</th>
+                                    <th scope="col">Visited At</th>
+                                    <th scope="col">Endpoint</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for visit in visits %}
+                                    <tr>
+                                        <th scope="row">{{ visit.id }}</th>
+                                        <td>{{ visit.device }}</td>
+                                        <td>{{ visit.browser }}</td>
+                                        <td>{{ visit.city }}</td>
+                                        <td>{{ visit.state }}</td>
+                                        <td>{{ visit.visited_at.strftime("%Y-%m-%d %H:%M:%S") }}</td>
+                                        <td>{{ visit.endpoint }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const visitTimes = {{ visit_times | safe }};  // JSON-like array of visit times
+
+        // Function to group visits by hour
+        function groupByHour(visits) {
+            const visitCountByHour = {};
+            visits.forEach(visit => {
+                const date = new Date(visit);
+
+                // Format the hour in 'YYYY-MM-DDTHH' format for grouping
+                const hour = date.toISOString().slice(0, 13);  // 'YYYY-MM-DDTHH'
+
+                if (visitCountByHour[hour]) {
+                    visitCountByHour[hour]++;
+                } else {
+                    visitCountByHour[hour] = 1;
+                }
+            });
+            return visitCountByHour;
+        }
+
+        // Group the visits by hour
+        const visitsGroupedByHour = groupByHour(visitTimes);
+
+        // Get the labels (unique hours) and data (visit counts)
+        const labels = Object.keys(visitsGroupedByHour);
+        const data = Object.values(visitsGroupedByHour);
+
+        // Format the labels to human-readable date and time in EST
+        const formattedLabels = labels.map(label => {
+            const date = new Date(label + ":00");  // Convert 'YYYY-MM-DDTHH' to Date object
+            return date.toLocaleString('en-US', {
+                month: 'numeric',
+                day: 'numeric',
+                year: '2-digit',
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true,
+                timeZone: 'America/New_York'  // Convert to Eastern Standard Time (EST)
+            });
+        });
+
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: formattedLabels,  // Use formatted labels with EST conversion
+                datasets: [{
+                    label: 'Website Visits by Hour',
+                    data: data,  // Count of visits for each hour
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Visits'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time (EST)'
+                        },
+                        ticks: {
+                            autoSkip: true,  // Skip some labels if there are too many
+                            maxRotation: 45,  // Rotate labels to avoid overlap
+                            minRotation: 0
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+
+
 {% endblock %}
