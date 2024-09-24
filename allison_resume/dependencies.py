@@ -14,16 +14,17 @@ def get_location_from_ip(ip: str):
         data = response.json()
 
         city = data.get("city", "Unknown")
-        state = data.get("region", "Unknown")
-        return city, state
+        state = data.get("region_code", "Unknown")
+        country = data.get("country", "Unknown")
+        return city, state, country
     except:
-        return "Unknown", "Unknown"
+        return "Unknown", "Unknown", "Unknown"
 
 
 # Dependency to log each visit
 def log_visit(request: Request, db: SessionLocal = Depends(get_session_local)):
     ip = request.client.host
-    city, state = get_location_from_ip(ip)
+    city, state, country = get_location_from_ip(ip)
 
     user_agent_string = request.headers.get("User-Agent", "Unknown")
     user_agent = parse(user_agent_string)
@@ -42,6 +43,7 @@ def log_visit(request: Request, db: SessionLocal = Depends(get_session_local)):
         user_agent_string=user_agent_string,
         city=city,
         state=state,
+        country=country,
         device=device,
         browser=browser,
         visited_at=visited_at,

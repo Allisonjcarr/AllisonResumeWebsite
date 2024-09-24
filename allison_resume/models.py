@@ -12,5 +12,6 @@ class WebsiteVisits(Base):
     browser = Column(String)
     city = Column(String)
     state = Column(String)
+    country = Column(String)
     visited_at = Column(DateTime)
     endpoint = Column(String)
