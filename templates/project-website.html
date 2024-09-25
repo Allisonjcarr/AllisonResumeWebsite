@@ -80,7 +80,7 @@
                                     </div>
                                     <div class="col-12 mt-3">
                                         <span>
-                                            Figure 1. The above line chart
+                                            Figure 1. The above line chart tracks website visits by hour
                                         </span>
                                         {{ code_card("SQL Query", "SELECT\n    id,\n    device,\n    browser,\n    city,\n    state,\n    visited_at,\n    endpoint\nFROM website_visits\nORDER BY id desc\nLIMIT 10;") }}
                                     </div>
@@ -106,12 +106,77 @@
                                             ten most recent records in the <code>website_visits</code> table of my database.
                                             The SQL used to display this table is:
                                         </span>
+                                        {{ code_card("SQL Query", "SELECT\n    device,\n    count(*)\n    FROM website_visits\nGROUP BY device;") }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card clear-card mt-4 p-1 p-md-2">
+                            <div class="card-body p-1 p-md-2">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h5>Figure 2: Browser Distribution</h5>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 mt-3">
+                                        <div>
+                                            <canvas id="browsersChart"></canvas>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 mt-3">
+                                        <span>
+                                            Figure 2. includes identifying factors about my website visitors;
+                                            location, device, browser and what endpoint they visited. This data includes the
+                                            ten most recent records in the <code>website_visits</code> table of my database.
+                                            The SQL used to display this table is:
+                                        </span>
+                                        {{ code_card("SQL Query", "SELECT\n    browser,\n    count(*)\n    FROM website_visits\nGROUP BY browser;") }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card clear-card mt-4 p-1 p-md-2">
+                            <div class="card-body p-1 p-md-2">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h5>Figure 3: USA Traffic by State</h5>
+                                    </div>
+                                    <div class="col-12 mt-4">
+                                        <div>
+                                            <canvas id="usaTrafficChart"></canvas>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-5">
+                                        <span>
+                                            Figure 1. The above line chart tracks website visits by hour
+                                        </span>
                                         {{ code_card("SQL Query", "SELECT\n    id,\n    device,\n    browser,\n    city,\n    state,\n    visited_at,\n    endpoint\nFROM website_visits\nORDER BY id desc\nLIMIT 10;") }}
                                     </div>
                                 </div>
                             </div>
                         </div>
 
+                        <div class="card clear-card mt-4 p-1 p-md-2">
+                            <div class="card-body p-1 p-md-2">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h5>Figure 3: Global Traffic by Country</h5>
+                                    </div>
+                                    <div class="col-12 mt-4">
+                                        <div>
+                                            <canvas id="globalTrafficChart"></canvas>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-5">
+                                        <span>
+                                            Figure 1. The above line chart tracks website visits by hour
+                                        </span>
+                                        {{ code_card("SQL Query", "SELECT\n    id,\n    device,\n    browser,\n    city,\n    state,\n    visited_at,\n    endpoint\nFROM website_visits\nORDER BY id desc\nLIMIT 10;") }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -119,9 +184,11 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/chartjs-chart-geo@4"></script>
     <script>
         const visitsOverTimeData = {{ chart_data['visits_over_time_chart_data'] | tojson }}
         const devicesData = {{ chart_data['devices_chart_data'] | tojson }}
+        const browsersData = {{ chart_data['browsers_chart_data'] | tojson }}
     </script>
 
     <script src="{{ url_for('static', path='js/charts.js') }}"></script>

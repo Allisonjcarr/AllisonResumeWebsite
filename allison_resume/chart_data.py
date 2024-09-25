@@ -36,7 +36,16 @@ def get_chart_data(db: SessionLocal):
     )
 
     devices = [device for device, _ in device_counts]
-    counts = [count for _, count in device_counts]
+    device_counts = [count for _, count in device_counts]
+
+    browser_counts = (
+        db.query(WebsiteVisits.browser, func.count(WebsiteVisits.browser))
+        .group_by(WebsiteVisits.browser)
+        .all()
+    )
+
+    browsers = [browser for browser, _ in browser_counts]
+    browser_counts = [count for _, count in browser_counts]
 
     return {
         "visits_table_data": db.query(WebsiteVisits)
@@ -49,6 +58,7 @@ def get_chart_data(db: SessionLocal):
         },
         "devices_chart_data": {
             "devices": devices,
-            "counts": counts,
+            "counts": device_counts,
         },
+        "browsers_chart_data": {"browsers": browsers, "counts": browser_counts},
     }
