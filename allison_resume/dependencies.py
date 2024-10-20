@@ -13,7 +13,7 @@ def get_location_from_ip(ip: str):
 
         city = data.get("city", "Unknown")
         state = data.get("region", "Unknown")
-        country = data.get("country", "Unknown")
+        country = data.get("country_name", "Unknown")
         return city, state, country
     except:
         return "Unknown", "Unknown", "Unknown"
