@@ -66,6 +66,8 @@ def get_chart_data(db: SessionLocal):
 
     country_counts = {}
     for country, count in country_counts_query:
+        if country == "US":
+            country = "United States of America"
         country_counts[country] = count
 
     return {
