@@ -1,3 +1,3 @@
-from allison_resume.models import Base, engine
+from allison_resume.db import Base, engine
 
 Base.metadata.create_all(bind=engine)
