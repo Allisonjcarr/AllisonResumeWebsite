@@ -1,7 +1,7 @@
 from datetime import datetime
 from pytz import timezone
 from sqlalchemy import func
-from sqlalchemy.orm import state
+from sqlalchemy.orm import Session
 
 from .db import SessionLocal
 from .models import WebsiteVisits
@@ -11,11 +11,11 @@ def get_chart_data(db: SessionLocal):
     # visits over time chart
     visits_by_hour = (
         db.query(
-            func.strftime("%Y-%m-%d %H", WebsiteVisits.visited_at).label("hour"),
+            func.to_char(WebsiteVisits.visited_at, "YYYY-MM-DD HH24").label("hour"),
             func.count(WebsiteVisits.id).label("visit_count"),
         )
-        .group_by(func.strftime("%Y-%m-%d %H", WebsiteVisits.visited_at))
-        .order_by(func.strftime("%Y-%m-%d %H", WebsiteVisits.visited_at))
+        .group_by(func.to_char(WebsiteVisits.visited_at, "YYYY-MM-DD HH24"))
+        .order_by(func.to_char(WebsiteVisits.visited_at, "YYYY-MM-DD HH24"))
         .all()
     )
 
