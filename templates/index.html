@@ -3,38 +3,67 @@
 {% block content %}
     <style>
         .avatar {
-            width: 100px; /* Width of the image */
-            height: 100px; /* Height of the image - must match width for a perfect circle */
-            object-fit: cover; /* Ensure the image covers the circle */
-            border-radius: 50%; /* Make the image circular */
-            display: block; /* Ensure margin auto works */
-            margin: 1rem auto; /* Center horizontally */
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+            margin: 1rem auto;
         }
+
+        #orvalImage {
+            opacity: 0;
+            transform: translateX(-100%);
+            transition: transform 5s ease-in-out, opacity 5s ease-in-out;
+        }
+
+        #orvalImage.slide-in {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        #orvalImage.slide-out {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+
     </style>
 
     <div class="container-fluid">
         <div class="row mt-2">
 
             {#    Left side of page    #}
-            <div class="col-sm-12 col-md-6">
+            <div class="col-sm-12 col-md-6 mb-3">
                 <div class="row justify-content-end">
                     <div class="col-sm-12 col-md-8">
-                        <div class="card clear-card">
+                        <div class="card clear-card " style="height: 87vh;">
                             <img src="{{ url_for('static', path='images/headshot.jpg') }}" class="avatar rounded-circle"
                                  style="border: 2px solid; width: 260px; height: 260px"
                                  alt="Avatar Image">
                             <div class="card-body text-center">
                                 <h2 class="card-title display-font">{{ resume_data['name'] }}</h2>
-                                <h5 class="card-subtitle mt-3">{{ resume_data['title'] }}</h5>
+                                <h6 class="card-subtitle mt-3">{{ resume_data['title'] }}</h6>
+                                <h6 class="card-subtitle mt-3">{{ resume_data['location'] }}</h6>
                                 <hr/>
-                                <p class="card-text">{{ resume_data['summary'] }}</p>
-                            </div>
-                            <div class="card-body text-center">
-                                <a href="mailto:{{ resume_data['email'] }}?subject=Contact%20via%20Website"
-                                   class="btn btn-primary">
-                                    Send me an email
+
+                                <div class="list-group">
+                                    <a href="#aboutMe" class="list-group-item list-group-item-action">About Me</a>
+                                    <a href="#skills" class="list-group-item list-group-item-action">Skills</a>
+                                    <a href="#education" class="list-group-item list-group-item-action">Education</a>
+                                    <a href="#experience" class="list-group-item list-group-item-action">Experience</a>
+                                </div>
+
+                                <hr/>
+                                <a class="btn btn-info btn-lg" href="{{ resume_data['github'] }}">
+                                    <i class="fa-brands fa-github"></i>
                                 </a>
-                                <a href="{{ resume_data['github'] }}" class="btn btn-primary">Github Profile</a>
+                                <a class="btn btn-info btn-lg" href="{{ resume_data['linkedin'] }}">
+                                    <i class="fa-brands fa-linkedin"></i>
+                                </a>
+                                <a class="btn btn-info btn-lg"
+                                   href="mailto:{{ resume_data['email'] }}?subject=Contact%20via%20Website">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -42,23 +71,26 @@
             </div>
 
             {#   Right side of page     #}
-            <div class="col-sm-12 col-md-6">
+            <div class="col-sm-12 col-md-6 mb-3">
                 <div class="row">
                     <div class="col-sm-12 col-md-8">
-                        <div class="card clear-card">
-                            <div class="card-body text-center">
-                                <h3 class="card-title">Skills</h3>
+                        <div class="card clear-card p-2" style="height: 87vh;">
+                            <div class="card-body overflow-auto">
+                                <h3 id="aboutMe" class="card-title text-center">About Me</h3>
                                 <hr/>
-                                <div class="badge-container mt-4">
+                                <p class="card-text mb-4"
+                                   style="text-indent: 20px">{{ resume_data['summary'] }}</p>
+                                <h3 id="skills" class="card-title text-center">Skills</h3>
+                                <hr/>
+                                <div class="badge-container mt-4 text-center">
                                     {% for skill in resume_data['skills'] %}
-                                        <span class="badge bg-info m-1" style="font-size: 16px">
+                                        <span class="badge bg-info m-1 text-black" style="font-size: 16px">
                                     {{ skill }}
                                 </span>
                                     {% endfor %}
                                 </div>
-
+                                <h3 id="education" class="card-title mt-4 text-center">Education</h3>
                                 <hr/>
-                                <h3 class="card-title">Education</h3>
                                 <div class="badge-container mt-4">
                                     {% for degree in resume_data['education'] %}
                                         <div class="card clear-card mt-4">
@@ -66,6 +98,26 @@
                                                 <h5 class="card-title">{{ degree['degree'] }}</h5>
                                                 <p>{{ degree['institution'] }}</p>
                                                 <p>{{ degree['dates'] }}</p>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <h3 id="experience" class="card-title mt-4 text-center">Experience</h3>
+                                <hr/>
+                                <div class="badge-container mt-4">
+                                    {% for experience in resume_data['experience'] %}
+                                        <div class="card clear-card mt-4">
+                                            <div class="card-body">
+                                                <h4 class="card-title">{{ experience['title'] }}</h4>
+                                                <h5>{{ experience['company'] }}</h5>
+                                                <b>{{ experience['location'] }}</b>
+                                                <br>
+                                                <i>{{ experience['dates'] }}</i>
+                                                <ul class="mt-3">
+                                                    {% for description in experience['description'] %}
+                                                        <li>{{ description }}</li>
+                                                    {% endfor %}
+                                                </ul>
                                             </div>
                                         </div>
                                     {% endfor %}
@@ -100,6 +152,10 @@
         </div>
     </div>
 
+    <img id="orvalImage" src="{{ url_for('static', path='images/orval.png') }}" style="cursor: pointer"
+         class="fixed-bottom">
+
+
 
     <script>
         const toastLiveExample = document.getElementById('liveToast')
@@ -107,6 +163,31 @@
             autohide: false
         })
         toastBootstrap.show()
+
+        let timeBetween = 5000;
+
+        function showOrval() {
+            if (window.innerWidth < 768) {
+                return;
+            }
+
+            setTimeout(function () {
+                document.getElementById('orvalImage').classList.remove('slide-out');
+                document.getElementById('orvalImage').classList.add('slide-in');
+            }, timeBetween);
+        }
+
+        window.onload = function () {
+            showOrval();
+            document.getElementById('orvalImage').onclick = function () {
+                this.classList.remove('slide-in');
+                this.classList.add('slide-out');
+                timeBetween += 2000
+                showOrval();
+            };
+        };
+
+
     </script>
 
 

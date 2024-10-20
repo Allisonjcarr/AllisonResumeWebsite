@@ -61,6 +61,9 @@ fetch('https://unpkg.com/us-atlas/states-10m.json').then((r) => r.json()).then((
     const nation = ChartGeo.topojson.feature(us, us.objects.nation).features[0];
     const states = ChartGeo.topojson.feature(us, us.objects.states).features;
 
+    console.log(stateData)
+
+
     const chart = new Chart(document.getElementById("usaTrafficChart").getContext("2d"), {
         type: 'choropleth',
         data: {
@@ -68,7 +71,10 @@ fetch('https://unpkg.com/us-atlas/states-10m.json').then((r) => r.json()).then((
             datasets: [{
                 label: 'States',
                 outline: nation,
-                data: states.map((d) => ({feature: d, value: Math.random() * 10})),
+                data: states.map((d) => ({
+                    feature: d,
+                    value: stateData[d.properties.name] ? stateData[d.properties.name] : 0
+                })),
             }]
         },
         options: {
@@ -97,14 +103,17 @@ fetch('https://unpkg.com/us-atlas/states-10m.json').then((r) => r.json()).then((
 
 fetch('https://unpkg.com/world-atlas/countries-50m.json').then((r) => r.json()).then((data) => {
     const countries = ChartGeo.topojson.feature(data, data.objects.countries).features;
-
+    
     const chart = new Chart(document.getElementById("globalTrafficChart").getContext("2d"), {
         type: 'choropleth',
         data: {
             labels: countries.map((d) => d.properties.name),
             datasets: [{
                 label: 'Countries',
-                data: countries.map((d) => ({feature: d, value: Math.random()})),
+                data: countries.map((d) => ({
+                    feature: d,
+                    value: countryData[d.properties.name] ? countryData[d.properties.name] : 0
+                })),
             }]
         },
         options: {

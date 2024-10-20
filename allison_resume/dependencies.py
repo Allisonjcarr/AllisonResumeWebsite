@@ -14,7 +14,7 @@ def get_location_from_ip(ip: str):
         data = response.json()
 
         city = data.get("city", "Unknown")
-        state = data.get("region_code", "Unknown")
+        state = data.get("region", "Unknown")
         country = data.get("country", "Unknown")
         return city, state, country
     except:

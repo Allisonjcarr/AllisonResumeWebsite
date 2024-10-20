@@ -6,6 +6,14 @@
     border: 2px solid;
 }
 
+.clear-card .list-group-item-action {
+    background-color: rgba(255, 255, 255, .8);
+}
+
+.clear-card .list-group {
+    border: 2px solid;
+}
+
 .body-font {
     font-family: "Fustat", sans-serif;
     font-optical-sizing: auto;
@@ -44,6 +52,24 @@ h4 {
 
 h5 {
     font-family: "Prata", serif;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 100, 100, 0.5);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+html {
+    scrollbar-color: rgba(100, 100, 100, 0.5) transparent;
+    scrollbar-width: thin;
 }
 
 

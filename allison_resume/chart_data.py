@@ -1,6 +1,7 @@
 from datetime import datetime
 from pytz import timezone
 from sqlalchemy import func
+from sqlalchemy.orm import state
 
 from .db import SessionLocal
 from .models import WebsiteVisits
@@ -47,6 +48,26 @@ def get_chart_data(db: SessionLocal):
     browsers = [browser for browser, _ in browser_counts]
     browser_counts = [count for _, count in browser_counts]
 
+    state_counts_query = (
+        db.query(WebsiteVisits.state, func.count(WebsiteVisits.state))
+        .group_by(WebsiteVisits.state)
+        .all()
+    )
+
+    state_counts = {}
+    for state, count in state_counts_query:
+        state_counts[state] = count
+
+    country_counts_query = (
+        db.query(WebsiteVisits.country, func.count(WebsiteVisits.country))
+        .group_by(WebsiteVisits.country)
+        .all()
+    )
+
+    country_counts = {}
+    for country, count in country_counts_query:
+        country_counts[country] = count
+
     return {
         "visits_table_data": db.query(WebsiteVisits)
         .order_by(WebsiteVisits.id.desc())
@@ -61,4 +82,6 @@ def get_chart_data(db: SessionLocal):
             "counts": device_counts,
         },
         "browsers_chart_data": {"browsers": browsers, "counts": browser_counts},
+        "state_chart_data": state_counts,
+        "country_chart_data": country_counts,
     }

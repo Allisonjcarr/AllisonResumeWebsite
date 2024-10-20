@@ -80,9 +80,9 @@
                                     </div>
                                     <div class="col-12 mt-3">
                                         <span>
-                                            Figure 1. The above line chart tracks website visits by hour
+                                            Figure 1. The above line chart tracks website visits by hour using data from Table 1. The SQL used to gather data:
                                         </span>
-                                        {{ code_card("SQL Query", "SELECT\n    id,\n    device,\n    browser,\n    city,\n    state,\n    visited_at,\n    endpoint\nFROM website_visits\nORDER BY id desc\nLIMIT 10;") }}
+                                        {{ code_card("SQL", "SELECT\n    visited_at,\n    count(*)\nFROM website_visits\nGROUP BY visited_at;") }}
                                     </div>
                                 </div>
                             </div>
@@ -101,12 +101,10 @@
                                     </div>
                                     <div class="col-sm-12 col-md-6 mt-3">
                                         <span>
-                                            Figure 2. includes identifying factors about my website visitors;
-                                            location, device, browser and what endpoint they visited. This data includes the
-                                            ten most recent records in the <code>website_visits</code> table of my database.
-                                            The SQL used to display this table is:
+                                            Figure 2. This pie chart examines the distribution of devices used to access the website over time using data from Table 1.
+                                            The SQL used to gather data is:
                                         </span>
-                                        {{ code_card("SQL Query", "SELECT\n    device,\n    count(*)\n    FROM website_visits\nGROUP BY device;") }}
+                                        {{ code_card("SQL", "SELECT\n    device,\n    count(*)\nFROM website_visits\nGROUP BY device;") }}
                                     </div>
                                 </div>
                             </div>
@@ -116,7 +114,7 @@
                             <div class="card-body p-1 p-md-2">
                                 <div class="row">
                                     <div class="col-12">
-                                        <h5>Figure 2: Browser Distribution</h5>
+                                        <h5>Figure 3: Browser Distribution</h5>
                                     </div>
                                     <div class="col-sm-12 col-md-6 mt-3">
                                         <div>
@@ -125,12 +123,10 @@
                                     </div>
                                     <div class="col-sm-12 col-md-6 mt-3">
                                         <span>
-                                            Figure 2. includes identifying factors about my website visitors;
-                                            location, device, browser and what endpoint they visited. This data includes the
-                                            ten most recent records in the <code>website_visits</code> table of my database.
-                                            The SQL used to display this table is:
+                                            Figure 3. This pie chart maps the distribution of browsers used to access the website using data from Table 1.
+                                            The SQL used to gather data is:
                                         </span>
-                                        {{ code_card("SQL Query", "SELECT\n    browser,\n    count(*)\n    FROM website_visits\nGROUP BY browser;") }}
+                                        {{ code_card("SQL", "SELECT\n    browser,\n    count(*)\nFROM website_visits\nGROUP BY browser;") }}
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +136,7 @@
                             <div class="card-body p-1 p-md-2">
                                 <div class="row">
                                     <div class="col-12">
-                                        <h5>Figure 3: USA Traffic by State</h5>
+                                        <h5>Figure 4: USA Traffic by State</h5>
                                     </div>
                                     <div class="col-12 mt-4">
                                         <div>
@@ -149,9 +145,9 @@
                                     </div>
                                     <div class="col-12 mt-5">
                                         <span>
-                                            Figure 1. The above line chart tracks website visits by hour
+                                            Figure 4. This map uses data from Table 1 to display the number of visits per state. The SQL used to gather this data is:
                                         </span>
-                                        {{ code_card("SQL Query", "SELECT\n    id,\n    device,\n    browser,\n    city,\n    state,\n    visited_at,\n    endpoint\nFROM website_visits\nORDER BY id desc\nLIMIT 10;") }}
+                                        {{ code_card("SQL", "SELECT\n    state,\n    count(*)\nFROM website_visits\nWHERE state != 'Unknown'\nGROUP BY state;") }}
                                     </div>
                                 </div>
                             </div>
@@ -161,7 +157,7 @@
                             <div class="card-body p-1 p-md-2">
                                 <div class="row">
                                     <div class="col-12">
-                                        <h5>Figure 3: Global Traffic by Country</h5>
+                                        <h5>Figure 5: Global Traffic by Country</h5>
                                     </div>
                                     <div class="col-12 mt-4">
                                         <div>
@@ -170,9 +166,9 @@
                                     </div>
                                     <div class="col-12 mt-5">
                                         <span>
-                                            Figure 1. The above line chart tracks website visits by hour
+                                            Figure 5. This world map displays the density of website visits per country using data from Table 1. The SQL used to gather this data is:
                                         </span>
-                                        {{ code_card("SQL Query", "SELECT\n    id,\n    device,\n    browser,\n    city,\n    state,\n    visited_at,\n    endpoint\nFROM website_visits\nORDER BY id desc\nLIMIT 10;") }}
+                                        {{ code_card("SQL", "SELECT\n    country,\n    count(*)\nFROM website_visits\nWHERE country != 'Unknown'\nGROUP BY country;") }}
                                     </div>
                                 </div>
                             </div>
@@ -189,6 +185,8 @@
         const visitsOverTimeData = {{ chart_data['visits_over_time_chart_data'] | tojson }}
         const devicesData = {{ chart_data['devices_chart_data'] | tojson }}
         const browsersData = {{ chart_data['browsers_chart_data'] | tojson }}
+        const stateData = {{ chart_data['state_chart_data'] | tojson }}
+        const countryData = {{ chart_data['country_chart_data'] | tojson }}
     </script>
 
     <script src="{{ url_for('static', path='js/charts.js') }}"></script>
