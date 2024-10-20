@@ -4,17 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1699bbb8-218f-40c2-9891-20f77ad53d35" name="Changes" comment="saving work">
-      <change afterPath="$PROJECT_DIR$/static/images/orval.png" afterDir="false" />
+    <list default="true" id="1699bbb8-218f-40c2-9891-20f77ad53d35" name="Changes" comment="db stuff">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allison_resume/chart_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/allison_resume/chart_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allison_resume/dependencies.py" beforeDir="false" afterPath="$PROJECT_DIR$/allison_resume/dependencies.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resume.json" beforeDir="false" afterPath="$PROJECT_DIR$/resume.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/charts.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/charts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/project-website.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/project-website.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allison_resume/db.py" beforeDir="false" afterPath="$PROJECT_DIR$/allison_resume/db.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +130,7 @@
       <workItem from="1726233008707" duration="24443000" />
       <workItem from="1726530467239" duration="152000" />
       <workItem from="1726530636563" duration="81230000" />
-      <workItem from="1728992434296" duration="8088000" />
+      <workItem from="1728992434296" duration="10918000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <option name="closed" value="true" />
@@ -188,7 +180,39 @@
       <option name="project" value="LOCAL" />
       <updated>1727268358032</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="gonna deploy it">
+      <option name="closed" value="true" />
+      <created>1729431988990</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1729431988990</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Procfile">
+      <option name="closed" value="true" />
+      <created>1729432888383</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1729432888383</updated>
+    </task>
+    <task id="LOCAL-00009" summary="db stuff">
+      <option name="closed" value="true" />
+      <created>1729433687698</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1729433687698</updated>
+    </task>
+    <task id="LOCAL-00010" summary="db stuff">
+      <option name="closed" value="true" />
+      <created>1729434332616</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1729434332616</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,7 +232,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First commit" />
     <MESSAGE value="saving work" />
-    <option name="LAST_COMMIT_MESSAGE" value="saving work" />
+    <MESSAGE value="gonna deploy it" />
+    <MESSAGE value="Procfile" />
+    <MESSAGE value="db stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="db stuff" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
