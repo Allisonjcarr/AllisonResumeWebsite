@@ -8,8 +8,6 @@ from user_agents import parse
 
 def get_location_from_ip(ip: str):
     try:
-        ip = "173.246.203.9"
-        # You can sign up for a free API key from ipapi or any other IP location service
         response = requests.get(f"http://ipapi.co/{ip}/json/")
         data = response.json()
 
@@ -21,14 +19,13 @@ def get_location_from_ip(ip: str):
         return "Unknown", "Unknown", "Unknown"
 
 
-# Dependency to log each visit
 def log_visit(request: Request, db: SessionLocal = Depends(get_session_local)):
     ip = request.client.host
     city, state, country = get_location_from_ip(ip)
 
     user_agent_string = request.headers.get("User-Agent", "Unknown")
     user_agent = parse(user_agent_string)
-    browser = user_agent.browser.family  # Browser name (e.g., "Chrome")
+    browser = user_agent.browser.family
     device = (
         "Mobile"
         if user_agent.is_mobile
