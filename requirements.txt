@@ -7,3 +7,4 @@ alembic
 requests
 user-agents
 pytz
+psycopg2-binary
