@@ -50,6 +50,7 @@ def get_chart_data(db: SessionLocal):
 
     state_counts_query = (
         db.query(WebsiteVisits.state, func.count(WebsiteVisits.state))
+        .filter(WebsiteVisits.state.isnot(None))
         .group_by(WebsiteVisits.state)
         .all()
     )
