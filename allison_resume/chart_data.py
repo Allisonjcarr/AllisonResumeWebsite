@@ -1,15 +1,28 @@
+import os
 from datetime import datetime
 from pytz import timezone
 from sqlalchemy import func
-from sqlalchemy.orm import Session
 
 from .db import SessionLocal
 from .models import WebsiteVisits
 
 
-def get_chart_data(db: SessionLocal):
-    # visits over time chart
-    visits_by_hour = (
+# local query uses SQLite
+def visits_by_hour_local(db: SessionLocal):
+    return (
+        db.query(
+            func.strftime("%Y-%m-%d %H", WebsiteVisits.visited_at).label("hour"),
+            func.count(WebsiteVisits.id).label("visit_count"),
+        )
+        .group_by(func.strftime("%Y-%m-%d %H", WebsiteVisits.visited_at))
+        .order_by(func.strftime("%Y-%m-%d %H", WebsiteVisits.visited_at))
+        .all()
+    )
+
+
+# prod query uses Postgres
+def visits_by_hour_prod(db: SessionLocal):
+    return (
         db.query(
             func.to_char(WebsiteVisits.visited_at, "YYYY-MM-DD HH24").label("hour"),
             func.count(WebsiteVisits.id).label("visit_count"),
@@ -18,6 +31,14 @@ def get_chart_data(db: SessionLocal):
         .order_by(func.to_char(WebsiteVisits.visited_at, "YYYY-MM-DD HH24"))
         .all()
     )
+
+
+def get_chart_data(db: SessionLocal):
+    # visits over time chart
+    if os.getenv("ENVIRONMENT") == "prod":
+        visits_by_hour = visits_by_hour_prod(db)
+    else:
+        visits_by_hour = visits_by_hour_local(db)
 
     est_timezone = timezone("US/Eastern")
     visit_dates = []
