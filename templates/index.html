@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-
+{% from "macros/code-card.html" import code_card %}
 {% block content %}
     <style>
         .avatar {
@@ -85,8 +85,8 @@
                                 <div class="badge-container mt-4 text-center">
                                     {% for skill in resume_data['skills'] %}
                                         <span class="badge bg-info m-1 text-black" style="font-size: 16px">
-                                    {{ skill }}
-                                </span>
+                                            {{ skill }}
+                                        </span>
                                     {% endfor %}
                                 </div>
                                 <h3 id="education" class="card-title mt-4 text-center">Education</h3>
@@ -121,6 +121,38 @@
                                             </div>
                                         </div>
                                     {% endfor %}
+                                </div>
+
+                                <div class="card clear-card mt-3">
+                                    <div class="card-body text-center">
+                                        <strong>
+                                            This website was made with ❤️ in North Carolina
+                                            <br>
+                                            by yours truly using:
+                                        </strong>
+                                        <ul class="my-2 m-auto list-group">
+                                            <a class="list-group-item list-group-item-action"
+                                               href="https://fastapi.tiangolo.com/">FastApi (Python)</a>
+                                            <li class="list-group-item">
+                                                HTML/Jinja2
+                                            </li>
+                                            <li class="list-group-item">
+                                                Javascript
+                                            </li>
+                                            <a class="list-group-item list-group-item-action"
+                                               href="https://www.sqlalchemy.org/">SQLAlchemy</a>
+                                            <a class="list-group-item list-group-item-action"
+                                               href="https://www.postgresql.org/">Postgres</a>
+                                            <a class="list-group-item list-group-item-action"
+                                               href="https://www.chartjs.org/">Charts.js</a>
+                                            <a class="list-group-item list-group-item-action"
+                                               href="https://www.heroku.com/home">Deployed on Heroku</a>
+                                        </ul>
+                                        Check out the fully functional <a href="/docs">REST Api</a>!
+                                        {{ code_card("Get my resume as JSON", "curl -X 'GET' 'https://www.allisoncarr.dev/resume' -H 'accept: application/json'", 'bash') }}
+                                        Check out the source code <a
+                                            href="https://github.com/Allisonjcarr/AllisonResumeWebsite">on Github</a>!
+                                    </div>
                                 </div>
                             </div>
                         </div>

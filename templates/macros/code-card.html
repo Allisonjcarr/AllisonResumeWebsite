@@ -1,4 +1,4 @@
-{% macro code_card(title, query) %}
+{% macro code_card(title, query, language='sql') %}
     <div class="container mt-4 mb-4" style="max-width: 500px">
         <div class="card shadow-lg line-numbers">
             <div class="card-header bg-primary text-white">
@@ -6,7 +6,7 @@
             </div>
             <pre class="text-monospace m-0"
                  style="border-top-left-radius: 0; border-top-right-radius: 0;"><code
-                    class="language-sql line-numbers">{{ query }}</code></pre>
+                    class="language-{{ language }} line-numbers">{{ query }}</code></pre>
         </div>
     </div>
 {% endmacro %}
